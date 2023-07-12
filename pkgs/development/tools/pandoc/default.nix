@@ -1,7 +1,7 @@
 { stdenv, lib, haskellPackages, fetchpatch, haskell, removeReferencesTo }:
 
 let
-  static = haskell.lib.compose.justStaticExecutables haskellPackages.pandoc;
+  static = haskell.lib.compose.justStaticExecutables haskellPackages.pandoc-cli;
 
 in
   (haskell.lib.compose.overrideCabal (drv: {

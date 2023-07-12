@@ -33,8 +33,11 @@ stdenv.mkDerivation rec {
     # Compat for Deno >=1.26
     substituteInPlace bin/quarto.js \
       --replace 'Deno.setRaw(stdin.rid, ' 'Deno.stdin.setRaw(' \
-      --replace 'Deno.setRaw(Deno.stdin.rid, ' 'Deno.stdin.setRaw('
+      --replace 'Deno.setRaw(Deno.stdin.rid, ' 'Deno.stdin.setRaw(' \
+      --replace ']))?.trim()' ']))?.trim().split(" ")[0]'
   '';
+
+  # Adding split because new version add garbage info on how it's compile, bigfix for quarto check
 
   dontStrip = true;
 
@@ -58,7 +61,7 @@ stdenv.mkDerivation rec {
       mv bin/* $out/bin
       mv share/* $out/share
 
-      runHook preInstall
+      runHook postInstall
   '';
 
   meta = with lib; {
