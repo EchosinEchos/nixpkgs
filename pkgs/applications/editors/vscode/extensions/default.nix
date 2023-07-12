@@ -372,13 +372,13 @@ let
         mktplcRef = {
           name = "Millet";
           publisher = "azdavis";
-          version = "0.3.5";
-          sha256 = "sha256-lQ7EMs6nsTEgP9BESMpyoZG7QVOe7DXzfg/iZr1+DCQ=";
+          version = "0.12.5";
+          sha256 = "sha256-gJIxCdoxWGThalY+qJ930UtRLFkvr34LfaSioAZH9TQ=";
         };
         nativeBuildInputs = [ jq moreutils ];
         postInstall = ''
           cd "$out/$installPrefix"
-          jq '.contributes.configuration.properties."millet.server.path".default = "${millet}/bin/lang-srv"' package.json | sponge package.json
+          jq '.contributes.configuration.properties."millet.server.path".default = "${millet}/bin/millet-ls"' package.json | sponge package.json
         '';
         meta = {
           description = "Standard ML support for VS Code";
@@ -2175,6 +2175,22 @@ let
         };
         meta = {
           license = lib.licenses.mit;
+        };
+      };
+
+      mgt19937.typst-preview = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "typst-preview";
+          publisher = "mgt19937";
+          version = "0.6.0";
+          sha256 = "sha256-ZrsTtbD3oIUjxSC1osGYwTynwvDFQxuGeDglopBJGxA=";
+        };
+        meta = {
+          description = "Typst Preview is an extension for previewing your Typst files in vscode instantly";
+          downloadPage = "https://marketplace.visualstudio.com/items?itemName=mgt19937.typst-preview";
+          homepage = "https://github.com/Enter-tainer/typst-preview-vscode";
+          license = lib.licenses.mit;
+          maintainers = [ lib.maintainers.drupol ];
         };
       };
 
